@@ -1,0 +1,33 @@
+# Define a sane GNU screen command entry character
+# first letter defines the screen command key.
+# second letter defines the literal insert key.
+escape ^Tt
+
+#Give 3000 lines of scrollback
+defscrollback 9000
+
+#Don't annoy me with the startup message for screen.
+startup_message off
+
+#Use 256 colors
+term screen-256color
+
+#Map some handy keys
+bindkey "^[[1;5D" prev  # change window with ctrl-left
+bindkey "^[[1;5C" next  # change window with ctrl-right
+
+#Setup the statusbar
+hardstatus alwayslastline
+hardstatus string '%{= kG}%-Lw%{= kW}%50> %n*%f %t%{= kG}%+Lw%< %{= kG}%-=%D %m/%d/%y | %C:%s %A | %1`%{-}'
+#hardstatus string '%{= kG}%-Lw%{= kW}%50> %n*%f %t%{= kG}%+Lw%< '
+
+#SSH hang workaround
+defflow off
+
+#Enable the scroll wheel
+termcapinfo xterm* ti@:te@
+
+#Fix the 256 color bug (http://robotsrule.us/vim/)
+attrcolor b ".I" # allow bold colors - necessary for some reason
+#termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # tell screen how to set colors. AB = background, AF=foreground
+#defbce on    # use current bg color for erased chars
